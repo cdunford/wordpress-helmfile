@@ -6,13 +6,22 @@ repositories:
 
 ---
 
+{{- $ingressClass := "ingress" -}}
+
 releases:
 - name: ingress
   namespace: ingress
   chart: ingress-nginx/ingress-nginx
   values:
-  - ingressClass: ingress
+  - controller:
+      ingressClass: {{ $ingressClass }}
 
 - name: wordpress
   namespace: wordpress
   chart: bitnami/wordpress
+  values:
+  - ingress:
+      enabled: true
+      hostname: kubernetes.docker.internal
+      annotations:
+        kubernetes.io/ingress.class: {{ $ingressClass }}
