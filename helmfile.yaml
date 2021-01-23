@@ -25,3 +25,8 @@ releases:
       hostname: kubernetes.docker.internal
       annotations:
         kubernetes.io/ingress.class: {{ $ingressClass }}
+  - wordpressPassword: password1
+  - mariadb:
+      auth:
+        rootPassword: password1
+        password: password1
